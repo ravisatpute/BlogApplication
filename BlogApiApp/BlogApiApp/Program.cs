@@ -1,12 +1,17 @@
 using BlogApiApp.Model;
 using BlogApiApp.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using System.Text;
 using static System.Net.Mime.MediaTypeNames;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,15 +51,12 @@ builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
 }));
 
 builder.Services.AddCors();
-//builder.Services.AddAllGenericTypes(typeof(IRepository<>), new[] { typeof(BlogDataContext).GetTypeInfo().Assembly });
+
 var app = builder.Build();
-//app.UseSecurityHeadersMiddleware(new SecurityHeadersBuilder()
-//    .AddDefaultSecurePolicy()
-//    .AddCustomHeader("Access-Control-Allow-Origin", "http://localhost:3000")
-//    .AddCustomHeader("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, PATCH, DELETE")
-//    .AddCustomHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Content-Type, Authorization"));
-//// Configure the HTTP request pipeline.
-///
+
+var app = builder.Build();
+
+
 
 app.UseCors(builder => builder
      .AllowAnyOrigin()
@@ -68,6 +70,8 @@ if (app.Environment.IsDevelopment())
 };
 
 app.UseHttpsRedirection();
+
+
 app.UseAuthentication();
 app.UseAuthorization();
 

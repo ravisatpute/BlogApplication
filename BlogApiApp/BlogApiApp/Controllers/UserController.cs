@@ -27,7 +27,11 @@ namespace BlogApiApp.Controllers
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var jwtToken = new JwtSecurityToken(_config["JWT:Issuer"], _config["JWT:Audience"], null,
-                expires: DateTime.Now.AddMinutes(5),
+
+                expires: DateTime.Now.AddMinutes(10),
+
+             
+
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(jwtToken);

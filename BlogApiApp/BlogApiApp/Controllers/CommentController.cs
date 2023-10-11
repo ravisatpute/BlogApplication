@@ -50,7 +50,6 @@ namespace BlogApiApp.Controllers
         [HttpPut]
         public async Task<ActionResult<Comment>> update(Comment comment)
         {
-
             comment.DateTime = DateTime.Now;
             var result = await repository.Update(comment);
             return CreatedAtAction("GetCommentById", new { id = comment.CommentId }, comment);
