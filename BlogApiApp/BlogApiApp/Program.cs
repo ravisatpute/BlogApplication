@@ -1,8 +1,17 @@
 using BlogApiApp.Model;
 using BlogApiApp.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System.Reflection;
+using System.Text;
+using static System.Net.Mime.MediaTypeNames;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +25,7 @@ builder.Services.AddDbContext<BlogDataContext>();
 builder.Services.AddScoped<Repository<User>>();
 builder.Services.AddScoped<Repository<Comment>>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).
     AddJwtBearer(options =>
@@ -41,7 +51,12 @@ builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
 }));
 
 builder.Services.AddCors();
+
 var app = builder.Build();
+
+var app = builder.Build();
+
+
 
 app.UseCors(builder => builder
      .AllowAnyOrigin()
@@ -56,7 +71,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// for autherization 
+
 app.UseAuthentication();
 app.UseAuthorization();
 
