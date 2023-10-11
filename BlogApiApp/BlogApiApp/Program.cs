@@ -5,13 +5,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System.Reflection;
-using System.Text;
-using static System.Net.Mime.MediaTypeNames;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,10 +46,6 @@ builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
 builder.Services.AddCors();
 
 var app = builder.Build();
-
-var app = builder.Build();
-
-
 
 app.UseCors(builder => builder
      .AllowAnyOrigin()
